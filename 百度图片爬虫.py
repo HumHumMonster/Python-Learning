@@ -1,4 +1,6 @@
 
+cnt = 1
+
 s = input("输入查找的信息")
 
 #确定url
@@ -6,24 +8,25 @@ url = f'https://image.baidu.com/search/flip?tn=baiduimage8&word={s}'
 
 import requests
 import re
-text = requests.get(url).text
 
-#print(text)
 
-image_urls = re.findall('"objURL":"(.*?)"' , text)
 
-for image_url in image_urls :
+while (url != None) :
+    text = requests.get(url).text
 
-    image_name = image_url.split('/')[-1]
-    # $表示匹配字符串的末尾
-    image_result = re.search('(.jpg|.png|.jpeg|.tif|.gif|.ico)$' , image_name)
+    #print(text)
 
-    if image_result == None :
-        image_name = image_name + '.jpg'
+    image_urls = re.findall('"objURL":"(.*?)"' , text)
 
-    print(image_name)
+    for image_url in image_urls :
 
-    image = requests.get(image_url).content
+        image_name = str(cnt) + '.jpg'
+        cnt += 1
+        print(cnt)
+        image = requests.get(image_url).content
 
-    with open('./test/%s' % image_name , 'wb') as file :
-        file.write(image)
+        with open('./test/%s' % image_name , 'wb') as file :
+            file.write(image)
+
+    url = 'https://image.baidu.com/' + re.findall('a href="(.*?)" class="n">下一页' , text)[0]
+    print(url)
