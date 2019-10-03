@@ -49,5 +49,28 @@ list(seq)
 复制列表
 
 
+元组(   ,   ,   )
+创建空元组
+tup1 = ();
+元组中的元素值是不允许修改的，但我们可以对元组进行连接组合.
+tup3 = tup1 + tup2;
+元组中的元素值是不允许删除的，但我们可以使用del语句来删除整个元组
+del tup;
+实例元组被删除后，输出变量会有异常信息，
+print (tup)
+NameError: name 'tup' is not defined
+
+len(tuple)
+计算元组元素个数。
+
+max(tuple)
+返回元组中元素最大值。
+
+min(tuple)
+返回元组中元素最小值。
+
+tuple(seq)
+将列表转换为元组。
+
 
 
