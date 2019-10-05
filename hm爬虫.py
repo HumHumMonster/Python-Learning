@@ -1,5 +1,6 @@
 import requests
 import os
+import time
 import re
 
 
@@ -16,7 +17,6 @@ for i in range (1 , 50) :
     mangas_names = re.findall('<a class="js-overview-link" href=".*?">(.*?)</a></h3>', text)
 
     for j in range (0 , len(mangas_urls)) :
-
         mangas_url = mangas_urls[j] + '/all-pages'
 
         mangas_name = re.sub('[?|><*/]', '', mangas_names[j])
@@ -52,3 +52,4 @@ for i in range (1 , 50) :
             image = requests.get(end_url).content
             with open(f'D:/爬虫计划/{mangas_name}/%s' % pic_name , 'wb') as file:
                     file.write(image)
+        time.sleep(5)
